@@ -12,11 +12,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class LoginFrame {
+public class LoginFrame implements ActionListener {
 
-	public static void main(String[] args) {
+	public static JFrame frame = new JFrame("Payroll Management System");
+	
+	public static void initializeLogin() {
 		
-		JFrame frame = new JFrame();
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridBagLayout());
 		JButton add = new JButton("Add Employee");
@@ -44,12 +45,41 @@ public class LoginFrame {
 		
 		panel.add(show, cst1);
 		
+		JButton delete = new JButton("Delete Employee");
+		show.addActionListener(new ShowEmployee());
+		
+		GridBagConstraints cst2 = new GridBagConstraints();
+		cst2.fill = GridBagConstraints.NONE;
+		cst2.gridx = 2;
+		cst2.gridy = 0;
+		cst2.weightx = 1.0; // --> You miss this for the top panel
+		cst2.weighty = 1.0;
+		
+		
+		//panel.add(detele , cst1);
+		
+		
 		frame.add(panel);
-		frame.setMinimumSize(new Dimension(300, 300));
+		frame.setMinimumSize(new Dimension(700, 700));
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+	}
+	
+	public static void main(String[] args) {
+		initializeLogin();
+	}
+
+	public static void dispose()
+	{
+		frame.dispose();
+	}
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		ShowEmployee.frame.dispose();
+		initializeLogin();
+		
 	}
 
 }
